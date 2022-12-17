@@ -1,9 +1,7 @@
-import 'package:chatapp/main.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class loginPage extends StatelessWidget {
-  const loginPage ({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage ({super.key});
   final String title = "Login Page";
 
   @override
@@ -16,10 +14,10 @@ class loginPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("LoginPage"),
+            const Text("LoginPage"),
             TextButton(
                 onPressed: () {Navigator.pop(context);},
-                child: Text("FirstPage"))
+                child: const Text("FirstPage"))
           ],
         ),
       ),

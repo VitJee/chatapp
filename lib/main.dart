@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void changeToLoginPage() {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return const loginPage();
+      return const LoginPage();
     }));
   }
 
@@ -56,10 +56,10 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("Bruh"),
+            const Text("WelcomePage"),
             TextButton(
                 onPressed: changeToLoginPage,
-                child: Text("FirstPage"))
+                child: const Text("FirstPage"))
           ],
         ),
       ),
