@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "545949761329",
+    "project_id": "chatapp-lernatelier",
+    "storage_bucket": "chatapp-lernatelier.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545949761329:android:9fd89b247ab7dd954afa10",
+        "android_client_info": {
+          "package_name": "ch.bbbaden.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "545949761329-hf2fajgehgag5jl41kivie8curb8fhgs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkNwSyo4zJt0KUTIDtJDPXeB-zfovyGhw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "545949761329-hf2fajgehgag5jl41kivie8curb8fhgs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "545949761329-bv9g2qt9p6eqjnnskecdprv484ke353j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ch.bbbaden.chatapp-lernatelier"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

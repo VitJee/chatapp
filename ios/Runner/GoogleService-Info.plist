@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>545949761329-k3cvrad9jm28a2u7pnv2sl24kiqqu6kl.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.545949761329-k3cvrad9jm28a2u7pnv2sl24kiqqu6kl</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCY30BePQv4HrS3XIrxJPUO3W5jjTMNvHA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>545949761329</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>ch.bbbaden.chatapp</string>
+	<key>PROJECT_ID</key>
+	<string>chatapp-lernatelier</string>
+	<key>STORAGE_BUCKET</key>
+	<string>chatapp-lernatelier.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:545949761329:ios:570c34ae6e42c47b4afa10</string>
+</dict>
+</plist>
