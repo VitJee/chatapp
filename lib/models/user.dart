@@ -1,25 +1,27 @@
-import 'package:flutter/material.dart';
-import 'dart:math';
+import 'dart:convert';
 
 class User {
-  final String userName;
-  final String userPassword;
-  final String userID;
-  static int LENGTH_OF_ID = 20;
+  String userEmail, uid;
+  bool isSelected;
+  var groupID;
 
-  const User(this.userName, this.userPassword, this.userID);
+  User({required this.userEmail, required this.uid, required this.isSelected, required this.groupID});
 
-  static String createUserID() {
-    var aCode = 'A'.codeUnitAt(0);
-    var zCode = 'Z'.codeUnitAt(0);
-    List<String> alphabets = List<String>.generate(
-      zCode - aCode + 1,
-          (index) => String.fromCharCode(aCode + index),
-    );
-    String ret = "";
-    for (int i = 0; i < LENGTH_OF_ID; i++) {
-      ret += alphabets[Random().nextInt(26)];
-    }
-    return ret;
+  void getsSelected() {
+    this.isSelected = !this.isSelected;
   }
+
+  Map<String, dynamic> toJson() => {
+    'uid': uid,
+    'email': userEmail,
+    'isSelected': isSelected,
+    'groups': groupID
+  };
+
+  static User fromJson(Map<String, dynamic> json) => User (
+    uid: json['uid'],
+    userEmail: json['email'],
+    isSelected: json['isSelected'],
+    groupID: json['groups']
+  );
 }

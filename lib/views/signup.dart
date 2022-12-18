@@ -1,13 +1,8 @@
-import 'package:chatapp/views/chatapp.dart';
-import 'package:chatapp/views/signup.dart';
+import 'package:chatapp/views/users.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import '../firebase_options.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'login.dart';
 
 class SignUp extends StatelessWidget {
@@ -17,7 +12,7 @@ class SignUp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return ChatApp();
+            return Users();
           } else {
             return SignUpPage();
           }
@@ -29,7 +24,7 @@ class SignUp extends StatelessWidget {
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
-  final String title = "Sign Up";
+  final String title = "ChatApp";
 
   @override
   State<StatefulWidget> createState() => SignUpState();
@@ -47,10 +42,18 @@ class SignUpState extends State<SignUpPage> {
 
   Future signUp() async {
     try {
+      List<String> groups = [];
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _email.text.trim(),
           password: _password.text.trim()
-      );
+      ).then((cred) => {
+        FirebaseFirestore.instance.collection("users").doc(cred.user?.uid).set({
+          "email": cred.user?.email,
+          "uid": cred.user?.uid,
+          "isSelected": false,
+          "groups": groups
+        })
+      });
     } on FirebaseAuthException catch(e) {
       print(e);
     }
@@ -70,8 +73,12 @@ class SignUpState extends State<SignUpPage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            const Padding(
+              padding: EdgeInsets.only(top: 30),
+              child: Text("Sign Up", style: TextStyle(fontSize: 32)),
+            ),
             Padding(
               padding: EdgeInsets.fromLTRB(paddingLeft, paddingTop, paddingRight, 0),
               child: TextField(

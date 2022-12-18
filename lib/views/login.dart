@@ -1,4 +1,4 @@
-import 'package:chatapp/views/chatapp.dart';
+import 'package:chatapp/views/users.dart';
 import 'package:chatapp/views/signup.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -13,21 +13,23 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
       home: Login()
   ));
 }
 
 class Login extends StatelessWidget {
+  const Login({super.key});
+
   @override
   Widget build(BuildContext context) => Scaffold(
     body: StreamBuilder<User?> (
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return ChatApp();
+          return Users();
         } else {
-          return LoginPage();
+          return const LoginPage();
         }
       },
     )
@@ -35,7 +37,7 @@ class Login extends StatelessWidget {
 }
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
   @override
   State<StatefulWidget> createState() => LoginPageState();
 }
@@ -43,7 +45,7 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> {
 
   final CollectionReference users = FirebaseFirestore.instance.collection("users");
-  final String title = "Login Page";
+  final String title = "ChatApp";
   final double paddingLeft = 50;
   final double paddingRight = 50;
   final double paddingTop = 10;
@@ -69,6 +71,7 @@ class LoginPageState extends State<LoginPage> {
     }));
   }
 
+  /*
   void signInWithGoogle() async {
     GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
@@ -78,6 +81,7 @@ class LoginPageState extends State<LoginPage> {
     );
     UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
   }
+  */
 
   @override
   Widget build(BuildContext context) {
@@ -87,8 +91,12 @@ class LoginPageState extends State<LoginPage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            const Padding(
+              padding: EdgeInsets.only(top: 30),
+              child: Text("Sign In", style: TextStyle(fontSize: 32)),
+            ),
             Padding(
                 padding: EdgeInsets.fromLTRB(paddingLeft, paddingTop, paddingRight, 0),
                 child: TextField(
@@ -125,11 +133,12 @@ class LoginPageState extends State<LoginPage> {
                     onPressed: login,
                     child: const Text("Login")
                 ),
-                Padding(padding: EdgeInsets.fromLTRB(5, 0, 5, 0)),
+                const Padding(padding: EdgeInsets.fromLTRB(5, 0, 5, 0)),
+                /* This is for signin with google accounts
                 ElevatedButton(
                     onPressed: signInWithGoogle,
                     child: Text("Google Signin")
-                )
+                )*/
               ],
             ),
             Row(
@@ -138,13 +147,13 @@ class LoginPageState extends State<LoginPage> {
                 RichText(
                     text: TextSpan(
                       text: "No Account?",
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 20
                       ),
                       children: [
                         TextSpan(
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.blue,
                             decoration: TextDecoration.underline
                           ),
