@@ -72,7 +72,7 @@ class UsersState extends State<UsersPage> {
         children: [
           SpeedDialChild(
             child: Icon(Icons.search),
-            label: "Search Groups",
+            label: "All Groups",
             onTap: () {
               Redirect.searchGroups(context);
             }

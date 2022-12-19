@@ -98,7 +98,7 @@ class SearchGroupState extends State<SearchGroupPage> {
                 }),
             SpeedDialChild(
                 child: Icon(Icons.search),
-                label: "Search Group",
+                label: "All Groups",
                 onTap: searchGroup),
             SpeedDialChild(
                 child: Icon(Icons.add),
