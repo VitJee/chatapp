@@ -14,9 +14,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MaterialApp(
-      home: Login()
-  ));
+  runApp(const MaterialApp(home: Login()));
 }
 
 class Login extends StatelessWidget {
@@ -24,33 +22,34 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    body: StreamBuilder<User?> (
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return SearchGroup();
-        } else {
-          return const LoginPage();
-        }
-      },
-    )
-  );
+          body: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return SearchGroup();
+          } else {
+            return const LoginPage();
+          }
+        },
+      ));
 }
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
   @override
   State<StatefulWidget> createState() => LoginPageState();
 }
 
 class LoginPageState extends State<LoginPage> {
-
-  final CollectionReference users = FirebaseFirestore.instance.collection("users");
+  final CollectionReference users =
+      FirebaseFirestore.instance.collection("users");
   final String title = "ChatApp";
   final double paddingLeft = 50;
   final double paddingRight = 50;
   final double paddingTop = 10;
   final double paddingBottom = 30;
+  String errorMessage = "";
 
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
@@ -58,16 +57,18 @@ class LoginPageState extends State<LoginPage> {
   Future login() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _email.text.trim(),
-          password: _password.text.trim()
-      );
+          email: _email.text.trim(), password: _password.text.trim());
     } on FirebaseAuthException catch (e) {
-      print(e);
+      setState(() {
+        errorMessage = e.message.toString();
+      });
+      print(e.message.toString());
     }
   }
 
   void signUp() {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (BuildContext context) {
       return SignUp();
     }));
   }
@@ -99,41 +100,35 @@ class LoginPageState extends State<LoginPage> {
               child: Text("Sign In", style: TextStyle(fontSize: 32)),
             ),
             Padding(
-                padding: EdgeInsets.fromLTRB(paddingLeft, paddingTop, paddingRight, 0),
+                padding: EdgeInsets.fromLTRB(
+                    paddingLeft, paddingTop, paddingRight, 0),
                 child: TextField(
                   controller: _email,
                   textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
                       labelText: "Email",
                       enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              width: 3, color: Colors.blue
-                          )
-                      )
-                  ),
-                )
-            ),
-            Padding(padding: EdgeInsets.fromLTRB(paddingLeft, paddingTop, paddingRight, paddingBottom),
+                          borderSide:
+                              BorderSide(width: 3, color: Colors.blue))),
+                )),
+            Padding(
+                padding: EdgeInsets.fromLTRB(
+                    paddingLeft, paddingTop, paddingRight, paddingBottom),
                 child: TextField(
                   controller: _password,
                   textInputAction: TextInputAction.done,
+                  obscureText: true,
                   decoration: const InputDecoration(
-                    labelText: "Password",
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 3, color: Colors.blue
-                        )
-                    )
-                ),)
-            ),
+                      labelText: "Password",
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 3, color: Colors.blue))),
+                )),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
-                ElevatedButton(
-                    onPressed: login,
-                    child: const Text("Login")
-                ),
+                ElevatedButton(onPressed: login, child: const Text("Login")),
                 const Padding(padding: EdgeInsets.fromLTRB(5, 0, 5, 0)),
                 /* This is for signin with google accounts
                 ElevatedButton(
@@ -147,27 +142,23 @@ class LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 RichText(
                     text: TextSpan(
-                      text: "No Account?",
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 20
-                      ),
-                      children: [
-                        TextSpan(
+                        text: "No Account?",
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 20),
+                        children: [
+                      TextSpan(
                           style: const TextStyle(
-                            color: Colors.blue,
-                            decoration: TextDecoration.underline
-                          ),
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline),
                           text: " SignUp",
-                          recognizer: TapGestureRecognizer()..onTap = () {
-                            signUp();
-                          }
-                        )
-                      ]
-                    )
-                )
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              signUp();
+                            })
+                    ])),
               ],
             ),
+            Text(errorMessage, style: TextStyle(color: Colors.red))
           ],
         ),
       ),
