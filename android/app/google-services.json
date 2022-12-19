@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "545949761329",
+    "firebase_url": "https://chatapp-lernatelier-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "chatapp-lernatelier",
     "storage_bucket": "chatapp-lernatelier.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "545949761329-30arjqecq0e3dbpb9b2mtvim6f1lr345.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ch.bbbaden.chatapp",
+            "certificate_hash": "99a5dc1dec24a89c0a4cf18ad7b31c7e0cf3a7af"
+          }
+        },
         {
           "client_id": "545949761329-hf2fajgehgag5jl41kivie8curb8fhgs.apps.googleusercontent.com",
           "client_type": 3

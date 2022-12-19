@@ -1,6 +1,6 @@
+import 'package:chatapp/models/redirects.dart';
 import 'package:chatapp/models/user.dart' as modUser;
-import 'package:chatapp/views/Utils.dart';
-import 'package:chatapp/views/findgroup.dart';
+import 'package:chatapp/views/searchgroup.dart';
 import 'package:chatapp/views/login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -31,6 +31,7 @@ class UsersState extends State<UsersPage> {
 
   @override
   void initState() {
+    allUsers = [];
     allUsersStream = FirebaseFirestore.instance.collection("users")
         .where("uid", isNotEqualTo: user.uid)
         .snapshots()
@@ -43,26 +44,6 @@ class UsersState extends State<UsersPage> {
   void read() async {
     allUsers = await allUsersStream.first;
     setState(() {});
-  }
-
-  void friends() {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
-      return Users();
-    }));
-  }
-
-  void searchFriends() {
-    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-      return SearchGroup();
-    }));
-  }
-
-  void signout() {
-    GoogleSignIn().signOut();
-    FirebaseAuth.instance.signOut();
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
-      return Login();
-    }));
   }
 
   @override
@@ -92,12 +73,16 @@ class UsersState extends State<UsersPage> {
           SpeedDialChild(
             child: Icon(Icons.search),
             label: "Search Groups",
-            onTap: searchFriends
+            onTap: () {
+              Redirect.searchGroups(context);
+            }
           ),
           SpeedDialChild(
             child: Icon(Icons.exit_to_app),
             label: "Sign Out",
-            onTap: signout
+            onTap: () {
+              Redirect.signOut(context);
+            }
           )
         ],
       )

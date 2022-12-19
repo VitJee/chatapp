@@ -1,7 +1,12 @@
+import 'package:chatapp/models/redirects.dart';
+import 'package:chatapp/views/searchgroup.dart';
 import 'package:chatapp/views/users.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class CreateGroup extends StatelessWidget {
   @override
@@ -25,16 +30,23 @@ class CreateGroupState extends State<CreateGroupPage> {
 
   void createGroup() {
     List<String> list = [];
-    FirebaseFirestore.instance.collection("groups").doc(_groupNameController.text).set({
+    /*FirebaseFirestore.instance.collection("groups").doc(_groupNameController.text).set({
       "chat": list,
       "id": _groupNameController.text,
       "isSelected": false
+    });*/
+    DatabaseReference db = FirebaseDatabase.instanceFor(
+        app: Firebase.app(),
+        databaseURL: "https://chatapp-lernatelier-default-rtdb.europe-west1.firebasedatabase.app/"
+    ).ref("groups/${_groupNameController.text}");
+    db.set({
+      "chat": [""]
     });
     setState(() {
       _groupNameController.clear();
     });
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
-      return Users();
+      return SearchGroup();
     }));
   }
 
@@ -65,7 +77,7 @@ class CreateGroupState extends State<CreateGroupPage> {
               child: Text("Create Group")
           )
         ],
-      )
+      ),
     );
   }
 }

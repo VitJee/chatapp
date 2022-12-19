@@ -1,3 +1,4 @@
+import 'package:chatapp/views/searchgroup.dart';
 import 'package:chatapp/views/users.dart';
 import 'package:chatapp/views/signup.dart';
 import 'package:flutter/gestures.dart';
@@ -27,7 +28,7 @@ class Login extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return Users();
+          return SearchGroup();
         } else {
           return const LoginPage();
         }
