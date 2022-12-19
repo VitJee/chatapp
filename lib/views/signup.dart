@@ -76,7 +76,7 @@ class SignUpState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("ChatApp - Sign Up"),
       ),
       body: Center(
         child: Column(

@@ -54,7 +54,7 @@ class SearchGroupState extends State<SearchGroupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("ChatApp - Groups")),
+        appBar: AppBar(title: Text("ChatApp - All Groups")),
         body: Column(
           children: [
             Padding(

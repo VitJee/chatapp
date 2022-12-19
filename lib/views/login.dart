@@ -89,7 +89,7 @@ class LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text("ChatApp - Login"),
       ),
       body: Center(
         child: Column(
